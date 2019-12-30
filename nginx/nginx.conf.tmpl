@@ -15,7 +15,7 @@ http {
     proxy_read_timeout          600;
     send_timeout                600;
 
-    location /ping {
+    location = /ping {
       return 200 'pong';
     }
 
@@ -24,8 +24,18 @@ http {
       index index.html;
     }
 
-    location /api {
+    location ^~ /api {
       proxy_pass http://{{API_HOST}}/;
+      proxy_http_version 1.1;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection "upgrade";
+      proxy_set_header Host $http_host;
+      proxy_redirect off;
+    }
+
+    location ~ ^\/(?<short_prefix>[\w]+)$ {
+      proxy_pass http://{{API_HOST}}/redirect?short_prefix=$short_prefix;
       proxy_http_version 1.1;
       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
       proxy_set_header Upgrade $http_upgrade;
