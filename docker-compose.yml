@@ -15,6 +15,9 @@ services:
   nginx:
     build:
       context: ./nginx
+      args:
+        server_name: "127.0.0.1:4000"
+        api_host: "api:4567"
     ports:
       - "4000:80"
     volumes:
