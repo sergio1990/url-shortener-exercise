@@ -1,0 +1,28 @@
+version: "3.7"
+services:
+  api:
+    build:
+      context: ./api-service
+    expose:
+      - "4567"
+
+  admin:
+    build:
+      context: ./admin-service
+    volumes:
+      - admin-service-static:/app
+
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - "4000:80"
+    volumes:
+      - type: volume
+        source: admin-service-static
+        target: /usr/share/nginx/html/admin-service
+        volume:
+          nocopy: true
+
+volumes:
+  admin-service-static:
