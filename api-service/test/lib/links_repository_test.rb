@@ -61,10 +61,10 @@ class LinksRepositoryTest < Minitest::Test
   def init_storage
     storage = Minitest::Mock.new
     def storage.load
-      {
-        'farmdrop' => Link.new('https://farmdrop.com', 'farmdrop'),
-        'google' => Link.new('https://google.com', 'google')
-      }
+      [
+        Link.new('https://farmdrop.com', 'farmdrop'),
+        Link.new('https://google.com', 'google')
+      ]
     end
     storage
   end

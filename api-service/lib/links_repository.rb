@@ -5,7 +5,7 @@ class LinksRepository
 
   def initialize(storage)
     @storage = storage
-    @links_hash = storage.load
+    @links_hash = init_links_hash
   end
 
   def all
@@ -30,5 +30,11 @@ class LinksRepository
     return unless links_hash.key?(short_prefix)
 
     raise ShortPrefixIsAlreadyTakenError, "The short prefix `#{short_prefix}` has already been taken!"
+  end
+
+  def init_links_hash
+    Hash[
+      storage.load.map { |link| [link.short_prefix, link] }
+    ]
   end
 end
