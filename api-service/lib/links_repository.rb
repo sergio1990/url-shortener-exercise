@@ -19,7 +19,7 @@ class LinksRepository
   def add(link)
     check_short_prefix_for_existence!(link.short_prefix)
     links_hash[link.short_prefix] = link
-    storage.persist(links_hash)
+    storage.persist(links_hash.values)
   end
 
   private

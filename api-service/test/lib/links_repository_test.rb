@@ -31,7 +31,7 @@ class LinksRepositoryTest < Minitest::Test
     new_link = Link.new('https://youtube.com', 'youtube')
     storage_mock = init_storage
     storage_mock.expect(:persist, nil) do |arg|
-      arg.is_a?(Hash) && (arg.count == 3)
+      arg.is_a?(Array) && (arg.count == 3)
     end
 
     repository = init_repository(storage_mock)
