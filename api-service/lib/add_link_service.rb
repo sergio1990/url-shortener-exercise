@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'digest'
+require_relative 'link'
 
 class AddLinkService
   Result = Struct.new(:full_url, :short_prefix)

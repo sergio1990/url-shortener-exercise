@@ -12,6 +12,6 @@ ADD Gemfile* $APP_HOME/
 RUN bundle install --without development test
 
 ADD lib/ $APP_HOME/lib
-ADD config.ru $APP_HOME
+ADD config.ru puma.rb app.rb $APP_HOME/
 
 CMD ["bundle", "exec", "puma", "-C", "puma.rb"]
