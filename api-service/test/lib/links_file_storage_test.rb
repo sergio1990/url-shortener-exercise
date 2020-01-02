@@ -3,19 +3,25 @@
 require 'test_helper'
 require 'links_file_storage'
 require 'link'
-require 'tmpdir'
 
 class LinksFileStorageTest < Minitest::Test
+  def setup
+    TestFileUtils.cleanup_tmp_folder
+  end
+
   def test_load_when_file_does_not_exists
-    file_path = File.join(Dir.tmpdir, 'unexisted_file.csv')
+    file_path = TestFileUtils.tmp_file_path('unexisted_file.csv')
     storage = LinksFileStorage.new(file_path)
     links = storage.load
     assert links.empty?
   end
 
   def test_load_when_file_exists_and_it_is_not_empty
-    file_path = File.join(Dir.tmpdir, 'test_load.csv')
-    File.open(file_path, 'w') { |file| file.write('https://farmdrop.com,farmdrop') }
+    file_path = TestFileUtils.tmp_file_path('test_load.csv')
+    TestFileUtils.create_file_with_content(
+      file_path,
+      'https://farmdrop.com,farmdrop'
+    )
     storage = LinksFileStorage.new(file_path)
 
     links = storage.load
@@ -27,12 +33,12 @@ class LinksFileStorageTest < Minitest::Test
   end
 
   def test_persist
-    file_path = File.join(Dir.tmpdir, 'test_persist.csv')
+    file_path = TestFileUtils.tmp_file_path('test_persist.csv')
     storage = LinksFileStorage.new(file_path)
 
     storage.persist([Link.new('https://google.com', 'google')])
 
-    content = File.read(file_path)
+    content = TestFileUtils.read_content(file_path)
 
     assert content.include?('https://google.com,google')
   end
