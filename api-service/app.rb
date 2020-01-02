@@ -9,8 +9,8 @@ require './lib/links_file_storage'
 require './lib/add_link_service'
 
 config = Config.new(ENV)
-storage = LinksFileStorage.new(config.storage_file_path)
-repository = LinksRepository.new(storage)
+storage = LinksFileStorage.new(config.storage_file_path, config.logger)
+repository = LinksRepository.new(storage, config.logger)
 
 get '/' do
   'Hello world from API!'
