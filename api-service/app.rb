@@ -42,6 +42,11 @@ post '/urls' do
   { short_url: "/#{result.short_prefix}", url: result.full_url }.to_json
 end
 
+get '/urls' do
+  content_type :json
+  repository.all.map(&:to_h).to_json
+end
+
 get '/redirect' do
   short_prefix = params['short_prefix'].to_s
   if short_prefix == ''
