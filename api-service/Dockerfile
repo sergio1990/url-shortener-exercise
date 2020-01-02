@@ -14,4 +14,4 @@ RUN bundle install --without development test
 ADD lib/ $APP_HOME/lib
 ADD config.ru $APP_HOME
 
-CMD ["bundle", "exec", "rackup", "--host", "0.0.0.0", "-p", "4567"]
+CMD ["bundle", "exec", "puma", "-C", "puma.rb"]
