@@ -32,13 +32,13 @@ end
 post '/urls' do
   content_type :json
   request_payload = JSON.parse(request.body.read)
-  url = request_payload['url']
-  if url.nil? || url == ''
+  url = request_payload['url'].to_s
+  if url.empty?
     halt 422, { errors: ['The parameter `url` has to be filled!'] }.to_json
   end
 
   service = AddLinkService.new(repository)
-  result = service.call(request_payload['url'])
+  result = service.call(url)
   { short_url: "/#{result.short_prefix}", url: result.full_url }.to_json
 end
 
@@ -49,7 +49,7 @@ end
 
 get '/redirect' do
   short_prefix = params['short_prefix'].to_s
-  if short_prefix == ''
+  if short_prefix.empty?
     status 422
     halt 422, { errors: ['The parameter `short_prefix` has to be filled!'] }.to_json
   end
