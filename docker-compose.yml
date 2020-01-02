@@ -5,6 +5,8 @@ services:
       context: ./api-service
     expose:
       - "4567"
+    environment:
+      - RACK_ENV=production
 
   admin:
     build:
