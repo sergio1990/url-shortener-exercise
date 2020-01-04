@@ -1,5 +1,13 @@
-FROM alpine
+FROM node:10.18.0
 
-RUN mkdir -p /app
+ENV APP_HOME /app
+
+RUN mkdir -p $APP_HOME
 WORKDIR /app
-ADD index.html .
+
+ADD package.json package-lock.json $APP_HOME/
+RUN npm i
+
+ADD . $APP_HOME/
+
+CMD ["npm", "run", "build"]

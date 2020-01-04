@@ -1,7 +1,8 @@
-var webpack = require('webpack');
-var path = require('path');
+const webpack = require('webpack');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-var parentDir = path.join(__dirname, '../');
+const parentDir = path.join(__dirname, '../');
 
 module.exports = {
   mode: "production",
@@ -23,6 +24,13 @@ module.exports = {
     path: parentDir + '/dist',
     filename: 'bundle.js'
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'URL Shortener App',
+      filename: path.join(parentDir, 'dist', 'index.html'),
+      template: path.join(parentDir, 'src', 'assets', 'index.html'),
+    })
+  ],
   devServer: {
     contentBase: parentDir,
     historyApiFallback: true

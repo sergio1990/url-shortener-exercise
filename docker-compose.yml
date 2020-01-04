@@ -12,7 +12,7 @@ services:
     build:
       context: ./admin-service
     volumes:
-      - admin-service-static:/app
+      - admin-service-static:/app/dist
 
   nginx:
     build:
