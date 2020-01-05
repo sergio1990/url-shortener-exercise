@@ -1,5 +1,5 @@
-let func = arg => {
-  console.log("Hello!");
-}
+import React from 'react'
+import {render} from 'react-dom'
+import App from './components/App';
 
-export default func;
+render(<App/>, document.getElementById('root'))
