@@ -1,7 +1,12 @@
 import React from 'react';
+import AddLinkForm from './AddLinkForm';
 
 function App() {
-  return <h1>Here will be the URL shortener admin app...</h1>;
+  return (
+    <div>
+      <AddLinkForm />
+    </div>
+  );
 }
 
 export default App;
