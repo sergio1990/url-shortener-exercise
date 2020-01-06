@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCopy, faArrowAltCircleRight } from '@fortawesome/free-regular-svg-icons';
 import config from 'config';
 
 function Row(props) {
@@ -12,7 +14,10 @@ function Row(props) {
       <td>
         <a href={ short_url } target="_blank">{ short_url }</a>
       </td>
-      <td>actions...</td>
+      <td>
+        <FontAwesomeIcon icon={ faCopy } size="lg" />
+        <FontAwesomeIcon icon={ faArrowAltCircleRight } size="lg" className="ml-2" />
+      </td>
     </tr>
   );
 }
