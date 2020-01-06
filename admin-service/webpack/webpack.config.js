@@ -37,6 +37,11 @@ module.exports = {
       template: path.join(parentDir, 'src', 'assets', 'index.html'),
     })
   ],
+  resolve: {
+    alias: {
+      config$: path.join(parentDir, 'src', 'config.js')
+    }
+  },
   devServer: {
     contentBase: parentDir,
     historyApiFallback: true
