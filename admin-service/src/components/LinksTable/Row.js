@@ -6,8 +6,12 @@ function Row(props) {
   const short_url = `${config.SHORT_LINK_BASE_URI}${short_prefix}`;
   return (
     <tr>
-      <td>{ full_url }</td>
-      <td>{ short_url }</td>
+      <td>
+        <a href={ full_url } target="_blank">{ full_url }</a>
+      </td>
+      <td>
+        <a href={ short_url } target="_blank">{ short_url }</a>
+      </td>
       <td>actions...</td>
     </tr>
   );
