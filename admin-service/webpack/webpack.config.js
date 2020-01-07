@@ -35,6 +35,10 @@ module.exports = {
       title: 'URL Shortener App',
       filename: path.join(parentDir, 'dist', 'index.html'),
       template: path.join(parentDir, 'src', 'assets', 'index.html'),
+    }),
+    new webpack.DefinePlugin({
+      'process.env.SHORTENER_API_BASE_URL': JSON.stringify(process.env.SHORTENER_API_BASE_URL),
+      'process.env.SHORT_LINK_BASE_URI': JSON.stringify(process.env.SHORT_LINK_BASE_URI)
     })
   ],
   resolve: {
