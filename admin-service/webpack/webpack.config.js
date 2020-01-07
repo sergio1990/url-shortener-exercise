@@ -43,7 +43,8 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      config$: path.join(parentDir, 'src', 'config.js')
+      config$: path.join(parentDir, 'src', 'config.js'),
+      utils: path.join(parentDir, 'src', 'utils')
     }
   },
   devServer: {
