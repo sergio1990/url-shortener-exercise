@@ -1,13 +1,14 @@
 import React from 'react';
 import AddLinkForm from './AddLinkForm';
 import LinksTable from './LinksTable';
+import LinksProvider from './LinksContext/Provider';
 
 function App() {
   return (
-    <div>
+    <LinksProvider>
       <AddLinkForm />
       <LinksTable />
-    </div>
+    </LinksProvider>
   );
 }
 
