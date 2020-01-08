@@ -23,16 +23,16 @@ function buildTableBody(content) {
 }
 
 function Rows() {
-  const data = useContext(context);
+  const { links } = useContext(context);
 
-  if (data === null) {
+  if (links === null) {
     return buildTableBody(buildInfoRow("A links list is being loading..."));
   }
-  if (data.length === 0) {
+  if (links.length === 0) {
     return buildTableBody(buildInfoRow("There are no links. You can add a new link using the form above."));
   }
 
-  const content = data.map(link => <Row key={ link.full_url } {...link} /> )
+  const content = links.map(link => <Row key={ link.full_url } {...link} /> )
   return buildTableBody(content);
 }
 

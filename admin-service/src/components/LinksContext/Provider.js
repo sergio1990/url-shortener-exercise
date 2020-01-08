@@ -11,9 +11,15 @@ function LinksProvider({ children }) {
     });
   }, []);
 
+  const reload = () => {
+    shortenerAPIClient.allLinks().then(data => {
+      setData(data);
+    });
+  };
+
   const { Provider } = context;
   return(
-    <Provider value={ data }>
+    <Provider value={{ links: data, reload: reload }}>
       { children }
     </Provider>
   )

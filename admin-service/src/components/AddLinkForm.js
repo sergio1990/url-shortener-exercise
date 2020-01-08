@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { context } from './LinksContext';
 import shortenerAPIClient from 'utils/shortener-api';
 
 function AddLinkForm() {
+  const { reload } = useContext(context);
+
   let longUrlField = null;
 
   const handleSubmit = (event) => {
@@ -9,6 +12,7 @@ function AddLinkForm() {
     const longUrl = longUrlField.value;
     shortenerAPIClient.shortenLink(longUrl).then(_data => {
       longUrlField.value = null;
+      reload();
     });
   };
 
