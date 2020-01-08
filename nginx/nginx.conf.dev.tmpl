@@ -1,0 +1,52 @@
+events {
+  worker_connections 1024;
+}
+
+http {
+  server {
+    server_name {{SERVER_NAME}};
+    server_name_in_redirect on;
+    listen 80;
+    client_max_body_size 1G;
+    keepalive_timeout 5;
+
+    proxy_connect_timeout       600;
+    proxy_send_timeout          600;
+    proxy_read_timeout          600;
+    send_timeout                600;
+
+    location = /ping {
+      return 200 'pong';
+    }
+
+    location ^~ /admin {
+      proxy_pass http://{{ADMIN_HOST}}/;
+      proxy_http_version 1.1;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection "upgrade";
+      proxy_set_header Host $http_host;
+      proxy_redirect off;
+    }
+
+    location ^~ /api {
+      proxy_pass http://{{API_HOST}}/;
+      proxy_http_version 1.1;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection "upgrade";
+      proxy_set_header Host $http_host;
+      proxy_redirect off;
+    }
+
+    location ~ ^\/(?<short_prefix>[\w]+)$ {
+      proxy_pass http://{{API_HOST}}/redirect?short_prefix=$short_prefix;
+      proxy_http_version 1.1;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection "upgrade";
+      proxy_set_header Host $http_host;
+      proxy_redirect off;
+    }
+  }
+}

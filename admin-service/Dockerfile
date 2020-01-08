@@ -5,9 +5,9 @@ ENV APP_HOME /app
 RUN mkdir -p $APP_HOME
 WORKDIR /app
 
-ADD package.json package-lock.json $APP_HOME/
+COPY package.json package-lock.json ./
 RUN npm i
 
-ADD . $APP_HOME/
+COPY . ./
 
 CMD ["npm", "run", "build"]

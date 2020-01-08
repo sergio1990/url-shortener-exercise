@@ -46,9 +46,5 @@ module.exports = {
       config$: path.join(parentDir, 'src', 'config.js'),
       utils: path.join(parentDir, 'src', 'utils')
     }
-  },
-  devServer: {
-    contentBase: parentDir,
-    historyApiFallback: true
   }
 }

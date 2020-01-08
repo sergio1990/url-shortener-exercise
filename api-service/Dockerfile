@@ -8,10 +8,9 @@ RUN mkdir $APP_HOME
 RUN mkdir $APP_HOME/lib
 WORKDIR $APP_HOME
 
-ADD Gemfile* $APP_HOME/
+COPY Gemfile* ./
 RUN bundle install --without development test
 
-ADD lib/ $APP_HOME/lib
-ADD config.ru puma.rb app.rb $APP_HOME/
+COPY . ./
 
 CMD ["bundle", "exec", "puma", "-C", "puma.rb"]
