@@ -9,6 +9,13 @@ class ShortenerAPI {
     const response = await axios.get(ALL_LINKS_FULL_URL);
     return response.data;
   }
+
+  async shortenLink(url) {
+    const data = { url: url };
+    const headers = { 'Content-Type': 'application/json' };
+    const response = await axios.post(SHORTEN_LINK_FULL_URL, data, { headers });
+    return response.data;
+  }
 }
 
 const defaultShortenerAPIClient = new ShortenerAPI();
