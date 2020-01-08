@@ -5,7 +5,7 @@ ENV APP_HOME /app
 RUN apt-get update -qq && apt-get install -y build-essential
 
 RUN mkdir $APP_HOME
-RUN mkdir $APP_HOME/lib
+RUN mkdir $APP_HOME/storage
 WORKDIR $APP_HOME
 
 COPY Gemfile* ./

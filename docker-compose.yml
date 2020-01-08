@@ -8,6 +8,9 @@ services:
     environment:
       - PORT=4567
       - RACK_ENV=production
+      - STORAGE_DIR=/app/storage
+    volumes:
+      - api-service-storage:/app/storage
 
   admin:
     build:
@@ -35,3 +38,4 @@ services:
 
 volumes:
   admin-service-static:
+  api-service-storage:
