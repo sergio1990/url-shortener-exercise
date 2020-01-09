@@ -1,0 +1,29 @@
+#!/bin/bash
+
+if [ $# -lt 2 ]; then
+  echo "You have to pass at least two arguments:"
+  echo "  ./composer <target-env> <arguments>"
+  exit 1
+fi
+
+ARGS=( "$@" )
+TARGET_ENV=$1
+COMPOSE_ARGS=( "${ARGS[@]:1}" )
+
+case $TARGET_ENV in
+  "prod")
+    PROJECT_NAME="url-shortener-prod"
+    COMPOSE_FILE="docker-compose.yml"
+    ;;
+  "dev")
+    PROJECT_NAME="url-shortener-dev"
+    COMPOSE_FILE="docker-compose.dev.yml"
+    ;;
+  *)
+    echo "You've specified unsupported environment '$TARGET_ENV'!"
+    echo "Only 'prod' and 'dev' are supported!"
+    exit 1
+    ;;
+esac
+
+eval "COMPOSE_PROJECT_NAME='$PROJECT_NAME' docker-compose -f $COMPOSE_FILE ${COMPOSE_ARGS[@]}"
