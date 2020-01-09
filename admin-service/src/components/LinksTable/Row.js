@@ -31,12 +31,14 @@ function Row(props) {
           title="Copy the short link"
           onMouseOver={ () => setData({ ...data, isCopyHover: true }) }
           onMouseOut={ () => setData({ ...data, isCopyHover: false }) }/>
-        <FontAwesomeIcon
-          icon={ data.isGoToHover ? fasArrowAltCircleRight : farArrowAltCircleRight }
-          size="lg"
-          onMouseOver={ () => setData({ ...data, isGoToHover: true }) }
-          onMouseOut={ () => setData({ ...data, isGoToHover: false }) }
-          className="ml-2" />
+        <a href={ short_url } target="_blank" style={{ color: "black" }}>
+          <FontAwesomeIcon
+            icon={ data.isGoToHover ? fasArrowAltCircleRight : farArrowAltCircleRight }
+            size="lg"
+            onMouseOver={ () => setData({ ...data, isGoToHover: true }) }
+            onMouseOut={ () => setData({ ...data, isGoToHover: false }) }
+            className="ml-2" />
+        </a>
       </td>
     </tr>
   );
