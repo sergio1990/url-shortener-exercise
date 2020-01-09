@@ -20,7 +20,7 @@ services:
     expose:
       - "8080"
     ports:
-      - "8081:8080"
+      - "8080:8080"
     environment:
       - SHORTENER_API_BASE_URL=http://127.0.0.1:4000/api/
       - SHORT_LINK_BASE_URI=http://127.0.0.1:4000/

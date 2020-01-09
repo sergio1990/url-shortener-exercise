@@ -5,7 +5,7 @@ import { context } from '../LinksContext';
 function buildInfoRow(message) {
   return (
     <tr>
-      <td colspan="3">
+      <td colSpan="3">
         <div className="alert alert-light" role="alert">
           { message }
         </div>
