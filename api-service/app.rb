@@ -50,6 +50,7 @@ get '/urls' do
 end
 
 get '/redirect' do
+  content_type :json
   short_prefix = params['short_prefix'].to_s
   if short_prefix.empty?
     status 422
@@ -58,5 +59,5 @@ get '/redirect' do
 
   service = RedirectService.new(repository)
   result = service.call(short_prefix)
-  redirect to(result.full_url), 301
+  redirect to(result.full_url), 301, {url: result.full_url}.to_json
 end
