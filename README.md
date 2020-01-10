@@ -63,3 +63,33 @@ And send us the resulting `yournamehere-url-shortener-test.bundle` file.
 This `.bundle` file can be cloned using:
 
     git bundle clone bundle-filename.bundle -b master directory-name
+
+## Solution
+
+### Architecture&Design
+
+#### Infrastructure
+
+From the infrastructure point of view the solution consists of the following components:
+
+- nginx - the reverse proxy service, which stays on top of all other service and hides them
+- admin fe - the service, which provides the frontend part of the solution.
+  Essentially, it's the React.js application, which uses the API service in
+order to show available links and add new ones.
+- api - the service, which provides the facilities to keep short links, add new
+  ones and perform redirect to the original URL
+
+![Infrastructure](docs/url-shortener-services-map.png)
+
+#### API service design
+
+The class diagram of the API service is presented below:
+
+![API service design](docs/url-shortener-api-service-design.png)
+
+#### Admin FE service design
+
+The Admin FE service is implemented as a React.js application, which could be
+represented as a tree of the components presented below:
+
+![Admin FE service design](docs/url-shortener-admin-fe-service-design.png)
