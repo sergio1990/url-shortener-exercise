@@ -8,3 +8,6 @@ gem 'sinatra'
 gem 'sinatra-contrib'
 
 gem 'minitest'
+
+gem 'sorbet'
+gem 'sorbet-runtime'
