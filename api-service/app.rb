@@ -12,7 +12,7 @@ require './lib/links_file_storage'
 require './lib/add_link_service'
 require './lib/redirect_service'
 
-config = Config.new(ENV)
+config = Config.new(ENV.to_h)
 storage = LinksFileStorage.new(config.storage_file_path, config.logger)
 repository = LinksRepository.new(storage, config.logger)
 

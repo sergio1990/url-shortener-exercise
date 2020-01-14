@@ -5,14 +5,27 @@ require 'tmpdir'
 require 'logger'
 
 class Config
+  extend T::Sig
+
+  sig do
+    params(
+      env_vars: T::Hash[T.untyped, T.untyped]
+    ).void
+  end
   def initialize(env_vars)
     @env_vars = env_vars
   end
 
+  sig do
+    returns(String)
+  end
   def storage_file_path
     @storage_file_path ||= resolve_storage_file_path
   end
 
+  sig do
+    returns(Logger)
+  end
   def logger
     @logger ||= init_logger
   end
