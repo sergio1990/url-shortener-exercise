@@ -1,8 +1,18 @@
+# typed: false
 # frozen_string_literal: true
 
 require 'test_helper'
 require 'links_repository'
 require 'link'
+
+class StubbedStorageLoader
+  def load
+    [
+      Link.new('https://farmdrop.com', 'farmdrop'),
+      Link.new('https://google.com', 'google')
+    ]
+  end
+end
 
 class LinksRepositoryTest < Minitest::Test
   def test_all
@@ -59,13 +69,6 @@ class LinksRepositoryTest < Minitest::Test
   end
 
   def init_storage
-    storage = Minitest::Mock.new
-    def storage.load
-      [
-        Link.new('https://farmdrop.com', 'farmdrop'),
-        Link.new('https://google.com', 'google')
-      ]
-    end
-    storage
+    Minitest::Mock.new(StubbedStorageLoader.new)
   end
 end
